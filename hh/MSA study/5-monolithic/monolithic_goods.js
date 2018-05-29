@@ -33,7 +33,7 @@ function register(method, pathname, params, cb) {
         errormessage: "success"
     };
 
-    if(params.name == null || params.category == null || params.price == null || params.discription == null) {
+    if(params.name == null || params.category == null || params.price == null || params.description == null) {
         response.errorcode = 1;
         response.errormessage = "Invalid Parameters";
         cb(response);
@@ -57,6 +57,7 @@ function register(method, pathname, params, cb) {
 function inquiry(method, pathname, params, cb) {
 
     var response = {
+        key: params.key,
         errorcode: 0,
         errormessage: "success"
     };
@@ -71,6 +72,7 @@ function inquiry(method, pathname, params, cb) {
         } else {
              response.results = results;
         }
+        cb(response);
     });
     connection.end();
 }

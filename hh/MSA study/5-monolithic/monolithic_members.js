@@ -42,7 +42,7 @@ function register(method, pathname, params, cb) {
 
         var connection = mysql.createConnection(conn);
         connection.connect();
-        connection.query("insert into member(username, password) values('" +
+        connection.query("insert into members(username, password) values('" +
                          params.username + "', password('" +
                          params.password +"'));", (error, results, fields) => {
                             if (error) {
@@ -77,10 +77,11 @@ function inquiry(method, pathname, params, cb) {
                                 response.errorcode = 1;
                                 response.errormessage = error ? error : "invlaid password";
                              } else {
-                                response.userid = result[0].id;
+                                response.userid = results[0].id;
                              }
                              cb(response);
                          });
+        connection.end();
     }
 }
 
